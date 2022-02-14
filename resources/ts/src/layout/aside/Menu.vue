@@ -195,7 +195,7 @@ export default defineComponent({
     const { t, te } = useI18n();
 
          // show token  
-    alert(JwtService.getToken());
+    // alert(JwtService.getToken());
    
     const route = useRoute();
     const scrollElRef = ref<null | HTMLElement>(null);

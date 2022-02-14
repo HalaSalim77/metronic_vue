@@ -79,6 +79,7 @@ import {
   themeLightLogo,
   themeDarkLogo,
 } from "@/core/helpers/config";
+import JwtService, { getToken } from "@/core/services/JwtService";
 
 export default defineComponent({
   name: "Layout",
@@ -99,6 +100,8 @@ export default defineComponent({
     const route = useRoute();
     const router = useRouter();
 
+  //  show token
+    alert(JwtService.getToken());
     // show page loading
     store.dispatch(Actions.ADD_BODY_CLASSNAME, "page-loading");
 

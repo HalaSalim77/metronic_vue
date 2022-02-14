@@ -208,20 +208,22 @@ export default defineComponent({
         //Form submit function
         const onSubmitLogin = (values) => {
             // Clear existing errors
-            store.dispatch(Actions.LOGOUT);
+            // store.dispatch(Actions.LOGOUT);
 
-            if (submitButton.value) {
-                // eslint-disable-next-line
-                submitButton.value!.disabled = true;
-                // Activate indicator
-                submitButton.value.setAttribute("data-kt-indicator", "on");
-            }
+            // if (submitButton.value) {
+            //     // eslint-disable-next-line
+            //     submitButton.value!.disabled = true;
+            //     // Activate indicator
+            //     submitButton.value.setAttribute("data-kt-indicator", "on");
+            // }
 
             axios
                 .post("/login", values)
                 .then(function (response) {
-                    console.log(response.data.data.token)
                     JwtService.saveToken(response.data.data.token);
+                    //save user info -- store an object > 
+                     window.localStorage.setItem('user_info' , JSON.stringify(response.data.user) );
+                    console.log('-------- token ------' ,JwtService.getToken() )
                      router.push({ name: "dashboard" });
                       Swal.fire({
                       text: "You have successfully logged in!",
@@ -231,6 +233,7 @@ export default defineComponent({
                       customClass: {
                         confirmButton: "btn fw-bold btn-light-primary",
                       },
+                    
                     }).then(function () {
                       // Go to page after successfully login
                     });
@@ -245,7 +248,9 @@ export default defineComponent({
                         confirmButton: "btn fw-bold btn-light-danger",
                       },
                     });
+                    
                 });
+                
         submitButton.value?.removeAttribute("data-kt-indicator");
         // eslint-disable-next-line
         submitButton.value!.disabled = false

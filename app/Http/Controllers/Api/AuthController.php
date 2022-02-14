@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
 
+
     public function register(UserRequest $request)
     {
         // $validator = Validator::make($request->all(), [
@@ -49,7 +50,7 @@ class AuthController extends Controller
             $success['name'] =  $user->name;
 
             return
-            response()->json(['message' => 'login success', 'data' => $success]);
+            response()->json(['message' => 'login success', 'data' => $success , 'user'=>$user]);
         } else {
           return  response()->json(['error' => 'Faild to login'],'401');
         }

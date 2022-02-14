@@ -12,17 +12,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _store_enums_StoreEnums__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/store/enums/StoreEnums */ "./resources/ts/src/store/enums/StoreEnums.ts");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
-/* harmony import */ var sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.js */ "./node_modules/sweetalert2/dist/sweetalert2.min.js");
-/* harmony import */ var sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _core_services_JwtService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/core/services/JwtService */ "./resources/ts/src/core/services/JwtService.ts");
-
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.js */ "./node_modules/sweetalert2/dist/sweetalert2.min.js");
+/* harmony import */ var sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _core_services_JwtService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/core/services/JwtService */ "./resources/ts/src/core/services/JwtService.ts");
 
 
 
@@ -34,42 +32,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   name: "sign-in",
   components: {
-    Field: vee_validate__WEBPACK_IMPORTED_MODULE_6__.Field,
-    Form: vee_validate__WEBPACK_IMPORTED_MODULE_6__.Form,
-    ErrorMessage: vee_validate__WEBPACK_IMPORTED_MODULE_6__.ErrorMessage
+    Field: vee_validate__WEBPACK_IMPORTED_MODULE_5__.Field,
+    Form: vee_validate__WEBPACK_IMPORTED_MODULE_5__.Form,
+    ErrorMessage: vee_validate__WEBPACK_IMPORTED_MODULE_5__.ErrorMessage
   },
   setup: function setup() {
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_7__.useStore)();
-    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_8__.useRouter)(); //validation when click submit btn
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_6__.useStore)();
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_7__.useRouter)(); //validation when click submit btn
 
     var submitButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null); //Create form validation object
 
-    var login = yup__WEBPACK_IMPORTED_MODULE_3__.object().shape({
-      email: yup__WEBPACK_IMPORTED_MODULE_3__.string().email().required().label("Email"),
-      password: yup__WEBPACK_IMPORTED_MODULE_3__.string().min(3).required().label("Password")
+    var login = yup__WEBPACK_IMPORTED_MODULE_2__.object().shape({
+      email: yup__WEBPACK_IMPORTED_MODULE_2__.string().email().required().label("Email"),
+      password: yup__WEBPACK_IMPORTED_MODULE_2__.string().min(3).required().label("Password")
     }); //if success > perform the function
     //Form submit function
 
     var onSubmitLogin = function onSubmitLogin(values) {
-      var _a; // Clear existing errors
+      // Clear existing errors
+      // store.dispatch(Actions.LOGOUT);
+      var _a; // if (submitButton.value) {
+      //     // eslint-disable-next-line
+      //     submitButton.value!.disabled = true;
+      //     // Activate indicator
+      //     submitButton.value.setAttribute("data-kt-indicator", "on");
+      // }
 
 
-      store.dispatch(_store_enums_StoreEnums__WEBPACK_IMPORTED_MODULE_1__.Actions.LOGOUT);
+      axios__WEBPACK_IMPORTED_MODULE_3___default().post("/login", values).then(function (response) {
+        _core_services_JwtService__WEBPACK_IMPORTED_MODULE_4__["default"].saveToken(response.data.data.token); //save user info -- store an object > 
 
-      if (submitButton.value) {
-        // eslint-disable-next-line
-        submitButton.value.disabled = true; // Activate indicator
-
-        submitButton.value.setAttribute("data-kt-indicator", "on");
-      }
-
-      axios__WEBPACK_IMPORTED_MODULE_4___default().post("/login", values).then(function (response) {
-        console.log(response.data.data.token);
-        _core_services_JwtService__WEBPACK_IMPORTED_MODULE_5__["default"].saveToken(response.data.data.token);
+        window.localStorage.setItem('user_info', JSON.stringify(response.data.user));
+        console.log('-------- token ------', _core_services_JwtService__WEBPACK_IMPORTED_MODULE_4__["default"].getToken());
         router.push({
           name: "dashboard"
         });
-        sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_2___default().fire({
+        sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_1___default().fire({
           text: "You have successfully logged in!",
           icon: "success",
           buttonsStyling: false,
@@ -80,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function () {// Go to page after successfully login
         });
       })["catch"](function (error) {
-        sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_2___default().fire({
+        sweetalert2_dist_sweetalert2_min_js__WEBPACK_IMPORTED_MODULE_1___default().fire({
           text: 'Your Password or Email is wrong!! ',
           icon: "error",
           buttonsStyling: false,

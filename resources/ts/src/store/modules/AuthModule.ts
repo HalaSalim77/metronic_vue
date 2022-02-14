@@ -76,7 +76,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
     this.isAuthenticated = false;
     this.user = {} as User;
     this.errors = [];
-    JwtService.destroyToken();
+   // JwtService.destroyToken();
   }
 
   @Action

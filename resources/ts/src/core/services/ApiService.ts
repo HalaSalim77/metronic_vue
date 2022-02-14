@@ -105,8 +105,8 @@ class ApiService {
    * @param resource: string
    * @returns Promise<AxiosResponse>
    */
-  public static delete(resource: string): Promise<AxiosResponse> {
-    return ApiService.vueInstance.axios.delete(resource);
+  public static delete(resource: string , id ): Promise<AxiosResponse> {
+    return ApiService.vueInstance.axios.delete(`${resource}/${id}`);
   }
 }
 

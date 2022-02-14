@@ -259,7 +259,9 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     component: () => import("@/components/page-layouts/Auth.vue"),
     children: [
+       
       {
+      
         path: "/sign-in",
         name: "sign-in",
         component: () =>
@@ -277,6 +279,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
           import("@/views/crafted/authentication/basic-flow/PasswordReset.vue"),
       },
+      
     ],
   },
   {
@@ -304,8 +307,9 @@ const router = createRouter({
 router.beforeEach(() => {
   // reset config to initial state
   store.commit(Mutations.RESET_LAYOUT_CONFIG);
-
-  store.dispatch(Actions.VERIFY_AUTH);
+  
+  //comment  this token_id 
+  // store.dispatch(Actions.VERIFY_AUTH);
 
   // Scroll page to top on every route change
   setTimeout(() => {

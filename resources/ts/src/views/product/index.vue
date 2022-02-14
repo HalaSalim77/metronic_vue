@@ -25,12 +25,23 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.price }}</td>
                     <td>{{ product.description }}</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                     <!-- <router-link :to="{name: 'edit', params: { id: product.id }}" class="btn btn-success">Edit</router-link> -->
-                        <button class="btn btn-danger btn-sm" @click="deleteProduct(product.id)">Delete</button>
-                    </div>
-                </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <!-- <router-link :to="{name: 'edit', params: { id: product.id }}" class="btn btn-success">Edit</router-link> -->
+                            <!-- <router-link
+                                class="menu-link"
+                                active-class="active"
+                                :to="product"
+                            >
+                            </router-link> -->
+                            <button
+                                class="btn btn-danger btn-sm"
+                                @click="deleteProduct(product.id)"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
             <!--end::Table body-->
@@ -40,6 +51,7 @@
 </template>
 <script>
 import ApiService from "@/core/services/ApiService";
+import Swal from "sweetalert2/dist/sweetalert2.min.js";
 export default {
     data() {
         return {
@@ -58,20 +70,17 @@ export default {
         async deleteProduct(id) {
             // Use sweetalert2
             console.log(id);
-            const data = await ApiService.delete(id, "products");
-
-            // if (data) {
-            //     await this.AllProducts();
-            //     this.makeToast('success')
-            // }
+            const data = await ApiService.delete("products", id);
+            console.log(data);
+            if (data.status == 200) {
+                Swal.fire({
+                    text: "Product deleted Successfully",
+                    icon: "success",
+                });
+                window.location.reload();
+                this.errors = [];
+            }
         },
-        // makeToast(variant = null) {
-        //     this.$bvToast.toast('Toast body content', {
-        //         title: `Variant ${variant || 'default'}`,
-        //         variant: variant,
-        //         solid: true
-        //     })
-        // }
     },
 };
 </script>
