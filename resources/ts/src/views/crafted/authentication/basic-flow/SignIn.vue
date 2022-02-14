@@ -220,9 +220,12 @@ export default defineComponent({
             axios
                 .post("/login", values)
                 .then(function (response) {
+                    //save token 
                     JwtService.saveToken(response.data.data.token);
                     //save user info -- store an object > 
+                    //show user  info in the  dashboard 
                      window.localStorage.setItem('user_info' , JSON.stringify(response.data.user) );
+                     //get token after save it 
                     console.log('-------- token ------' ,JwtService.getToken() )
                      router.push({ name: "dashboard" });
                       Swal.fire({
