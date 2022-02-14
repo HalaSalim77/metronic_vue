@@ -62,11 +62,13 @@ export default {
         this.AllProducts();
     },
     methods: {
+        //show products function
         async AllProducts(currentPage) {
             const data = await ApiService.get("products");
             console.log(data.data);
             this.products = data.data;
         },
+        //delete product 
         async deleteProduct(id) {
             // Use sweetalert2
             console.log(id);
